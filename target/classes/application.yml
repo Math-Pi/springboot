@@ -1,0 +1,37 @@
+#服务器配置
+server:
+  port: 8080
+  session-timeout: 30
+  tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+
+#spring相关配置
+spring:
+  #配置thymeleaf（这样配置后，再代码中返回到那个页面就不用写过多的前缀和后缀了，达到简化效果）
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  #配置数据库相关信息
+  datasource:
+    #java.sql.sql异常：服务器时区值。在配置数据库的urlserverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/boot?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    initial-size: 10
+    max-active: 20
+    max-idle: 8
+    min-idle: 8
+  #配置jpa（hibernate）相关信息
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
